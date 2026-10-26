@@ -8,6 +8,7 @@ def get_random_word():
     """Selects a random word from the list."""
     return WORDS[random.randint(0, len(WORDS) - 1)]
 
+
 def display_game_state(mistakes, secret_word, guessed_letters):
     # Display the snowman stage for the current number of mistakes.
 
@@ -22,15 +23,18 @@ def display_game_state(mistakes, secret_word, guessed_letters):
     print("Word: ", display_word)
     print("\n")
 
+
 def restart_game():
+    """provided the user input Y or N the function returns True for Y/y and False for N/n otherwise user is asked fpr input again"""
     yesno_input = ""
     while yesno_input != "Y" and yesno_input != "N":
         yesno_input = input("Would you like to play again? (Y/N)").capitalize()
 
     return yesno_input.capitalize() == "Y"
 
-def play_game():
 
+def play_game():
+        """main game function"""
         secret_word = get_random_word()
         guessed_letters = []
         mistakes = 0
@@ -67,6 +71,7 @@ def play_game():
                     return
 
 def get_input( ):
+    """users input is checked if it's 1 character long and is not a number and is returned if it is correct. Correct is any 1 letter"""
     while True:
         guess = str(input("Guess a letter: ").lower())
         try:
