@@ -22,6 +22,13 @@ def display_game_state(mistakes, secret_word, guessed_letters):
     print("Word: ", display_word)
     print("\n")
 
+def restart_game():
+    yesno_input = ""
+    while yesno_input != "Y" and yesno_input != "N":
+        yesno_input = input("Would you like to play again? (Y/N)").capitalize()
+
+    return yesno_input.capitalize() == "Y"
+
 def play_game():
 
         secret_word = get_random_word()
@@ -44,31 +51,20 @@ def play_game():
                 mistakes += 1
             if set (secret_word) == set (guessed_letters):
                 print("You saved the Snowman and won!")
-                yesno_input=""
-                while yesno_input != "Y" and yesno_input != "N":
-                    yesno_input = input("Would you like to play again? (Y/N)")
-                    if yesno_input == "Y":
-                        secret_word = get_random_word()
-                        guessed_letters = []
-                        mistakes = 0
-                    if yesno_input == "N":
-                        return
-
+                if restart_game():
+                    secret_word = get_random_word()
+                    guessed_letters = []
+                    mistakes = 0
+                else:
+                    return
             if mistakes >= len(ascii_art.STAGES):
                 print("You lost!")
-                yesno_input=""
-                while yesno_input != "Y" and yesno_input != "N":
-                    yesno_input = input("Would you like to play again? (Y/N)").capitalize()
-                    if yesno_input == "Y":
-                        secret_word = get_random_word()
-                        guessed_letters = []
-                        mistakes = 0
-
-                    if yesno_input == "N":
-                        return
-
-
-
+                if restart_game():
+                    secret_word = get_random_word()
+                    guessed_letters = []
+                    mistakes = 0
+                else:
+                    return
 
 def get_input( ):
     while True:
